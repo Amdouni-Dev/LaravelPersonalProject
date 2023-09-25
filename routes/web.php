@@ -18,3 +18,7 @@ Route::get('/', function () {
 });
 Route::get('/test',[\App\Http\Controllers\TestController::class,'test']);
 Route::get('/test2',[\App\Http\Controllers\TestController::class,'test2']);
+Route::get('/testForm',[\App\Http\Controllers\TestController::class,'testForm']);
+
+Route::get('/testTemplate',[\App\Http\Controllers\TestController::class,'testTemplate']);
+
