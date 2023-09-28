@@ -16,12 +16,19 @@ class EventFactory extends Factory
      */
     public function definition()
     {
+        $color = $this->faker->hexColor;
+        $start = $this->faker->dateTimeBetween('-30 days', '+30 days')->format('Y-m-d H:i:s');
+        $end = $this->faker->dateTimeBetween($start, '+30 days')->format('Y-m-d H:i:s');
         return [
+
 'nom'=>$this->faker->sentence,
             'lieu'=>$this->faker->address,
             'date'=>$this->faker->date,
             'description'=>$this->faker->paragraph,
-            'categorie' => $this->faker->randomElement(['Vêtements', 'Électronique', 'Nourriture', 'Autre'])
+            'categorie' => $this->faker->randomElement(['Vêtements', 'Électronique', 'Nourriture', 'Autre']),
+            'start'=>$start,
+            'end'=>$end,
+'color' => $color,
 
 
 

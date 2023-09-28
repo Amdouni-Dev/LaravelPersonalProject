@@ -25,6 +25,11 @@ Route::get('/testTemplate',[\App\Http\Controllers\TestController::class,'testTem
 
 // Partie Event
 Route::get('/events',[\App\Http\Controllers\EventController::class,'affiche']);
+
+Route::get('/events',[\App\Http\Controllers\EventController::class,'affiche'])->name('events.index');
+
+Route::get('/events2',[\App\Http\Controllers\EventController::class,'rechercheParDate'])->name('events.rechercheParDate');
+
 Route::post('/events', [EventController::class, 'store'])->name('events.store');
 
 Route::get('/createEvent', [EventController::class, 'create']);
@@ -37,8 +42,27 @@ Route::put('/events/{id}', [EventController::class, 'update'])->name('events.upd
 Route::get('/eventsShow/{id}', [EventController::class, 'show'])->name('events.show');
 
 
+
+Route::get('/participations',[\App\Http\Controllers\ParticipationController::class,'index']);
+//Afficher le formulaire d'ajout d'une participation
+Route::get('/participations/create',[\App\Http\Controllers\ParticipationController::class,'create']);
+
+// route pour ajouter une participation
+Route::post('/participations',[\App\Http\Controllers\ParticipationController::class,'store'])->name('participations.store');
+
+
+// supprimer une participation
+Route::delete('/participations/{id}',[\App\Http\Controllers\ParticipationController::class,'destroy'])->name('participations.destroy');
 //Route::put('/events', [EventController::class, 'update']);
 
+// afficher formulaire de modification d'une participation
+Route::get('/participations/edit/{id}',[\App\Http\Controllers\ParticipationController::class,'edit'])->name('participations.edit');
+//Modifier participation
+Route::put('/participations/{id}',[\App\Http\Controllers\ParticipationController::class,'update'])->name('participations.update');
+
+Route::get('/cal', function () {
+    return view('home');
+});
 
 
 

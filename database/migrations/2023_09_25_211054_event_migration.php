@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('categorie')->default('Autre');
             $table->date('date');
             $table->text('description');
+           $table->dateTime('start');
+           $table->dateTime('end')->nullable();
+           $table->string('color');
            $table->timestamps();
 
 

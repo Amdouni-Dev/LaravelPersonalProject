@@ -8,14 +8,43 @@ use Illuminate\Http\Request;
 class EventController extends Controller
 {
 
-    public function affiche(){
-        $listEvents = Event::all();
+    public function affiche(Request $request){
+        $listEvents = Event::where([
+            ['nom', '!=', Null],
+            [function($query) use ($request){
+            if(($term =$request->term)){
+                $query->orWhere('nom','LIKE','%'.$term.'%')->get();
+            }
+            }  ]
+        ])
+            ->orderBy('id','asc')
+            ->paginate(10);
 
         // tri
 //        $listEvents =Event::orderBy('nom')->get();
 //        $listEvents =Event::where('id',1 )->orderBy('nom')->get();
 
-        return view('events',compact('listEvents'));
+        return view('events',compact('listEvents'))->with('i',(request()->input('page',1)-1)*5);
+    }
+
+
+    public function rechercheParDate(Request $request){
+        $listEvents = Event::where([
+            ['date', '!=', Null],
+            [function($query) use ($request){
+                if(($term =$request->term)){
+                    $query->orWhere('date','LIKE','%'.$term.'%')->get();
+                }
+            }  ]
+        ])
+            ->orderBy('id','asc')
+            ->paginate(10);
+
+        // tri
+//        $listEvents =Event::orderBy('nom')->get();
+//        $listEvents =Event::where('id',1 )->orderBy('nom')->get();
+
+        return view('events',compact('listEvents'))->with('i',(request()->input('page',1)-1)*5);
     }
 
     /**

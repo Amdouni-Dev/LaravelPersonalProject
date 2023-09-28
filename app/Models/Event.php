@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     use HasFactory;
-    protected $fillable = ['nom'];
+//    protected $fillable = ['nom'];
+    protected $fillable = ['id', 'nom', 'start', 'end',];
 
+    public function participations(){
+        return $this->hasMany(Participation::class);
+    }
 }
